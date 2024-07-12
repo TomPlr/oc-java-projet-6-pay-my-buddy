@@ -46,5 +46,4 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "connection_id")
     )
     private List<UserEntity> connections = new ArrayList<>();
-
 }

@@ -1,8 +1,13 @@
 package com.paymybuddy.service;
 
-import org.springframework.stereotype.Service;
+import com.paymybuddy.model.UserModel;
 
-@Service
-public class UserService {
+public interface UserService {
 
+    /**
+     * Get user by username
+     *
+     * @return UserDto
+     */
+    UserModel findByUsername(String username);
 }
