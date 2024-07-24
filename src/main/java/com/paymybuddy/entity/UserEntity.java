@@ -33,6 +33,9 @@ public class UserEntity {
     @Column(name = "active", nullable = false)
     private Boolean active = false;
 
+    @Column(name = "role", nullable = false, length = 100)
+    private String role;
+
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {
