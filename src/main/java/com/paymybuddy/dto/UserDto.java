@@ -1,4 +1,7 @@
 package com.paymybuddy.dto;
 
-public record UserDto(int id, String username, String email, Boolean active) {
+import lombok.AccessLevel;
+import lombok.Setter;
+
+public record UserDto(@Setter(AccessLevel.NONE) int id, String username, String email, Boolean active) {
 }

@@ -4,7 +4,6 @@ import com.paymybuddy.entity.UserEntity;
 import com.paymybuddy.model.UserModel;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
