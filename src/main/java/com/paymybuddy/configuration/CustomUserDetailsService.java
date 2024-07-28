@@ -23,13 +23,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     /**
-     * @param username
+     * @param email
      * @return new User()
      * @throws UsernameNotFoundException
      */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findByUsername(username).orElseThrow();
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        UserEntity user = userRepository.findByEmail(email).orElseThrow();
 
         return new User(user.getUsername(), user.getPassword(), getGrantedAuthorities(user.getRole()));
     }
