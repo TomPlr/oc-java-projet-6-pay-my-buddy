@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor
@@ -22,7 +24,7 @@ public class UserController {
     }
 
     @PatchMapping
-    public ResponseEntity<UserModel> updateUser(@RequestBody UserDto user) {
+    public ResponseEntity<UserModel> updateUser(@RequestBody UserDto user, Principal principal) {
         return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
     }
 
