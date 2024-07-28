@@ -7,6 +7,14 @@ import com.paymybuddy.model.UserModel;
 public interface UserService {
 
     /**
+     * Save a new user
+     *
+     * @param user UserDto
+     * @return UserModel
+     */
+    UserModel save(UserDto user);
+
+    /**
      * Get user by username
      *
      * @param username String

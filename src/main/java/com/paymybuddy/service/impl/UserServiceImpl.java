@@ -9,19 +9,36 @@ import com.paymybuddy.repository.UserRepository;
 import com.paymybuddy.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserAssembler userAssembler;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, UserAssembler userAssembler) {
+    public UserServiceImpl(UserRepository userRepository, UserAssembler userAssembler, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userAssembler = userAssembler;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public UserModel save(UserDto user) {
+        UserEntity newUser = new UserEntity();
+
+        newUser.setUsername(user.username());
+        newUser.setPassword(passwordEncoder.encode(user.password()));
+        newUser.setEmail(user.email());
+
+
+        return userAssembler.toModel(userRepository.save(newUser));
     }
 
     @Override

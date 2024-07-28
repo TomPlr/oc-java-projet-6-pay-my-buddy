@@ -22,13 +22,16 @@ public class TransactionEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "amount", columnDefinition = "double UNSIGNED not null")
+    private Object amount;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "sender_account_id", nullable = false)
     private AccountEntity senderAccountEntity;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "receiver_account_id", nullable = false)
     private AccountEntity receiverAccountEntity;
-    @Column(name = "amount", columnDefinition = "double UNSIGNED not null")
-    private Object amount;
+
 
 }
