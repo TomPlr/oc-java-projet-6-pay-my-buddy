@@ -36,4 +36,12 @@ public interface UserService {
      * @return GenericResponseModel
      */
     GenericResponseModel delete();
+
+    /**
+     * Add a new connection
+     *
+     * @param email String
+     * @return GenericResponseModel
+     */
+    UserModel addConnection(String email);
 }

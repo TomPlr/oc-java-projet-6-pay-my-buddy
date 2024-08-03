@@ -9,18 +9,18 @@
     <link rel="stylesheet" type="text/css" href="../static/styles/main.css" data-th-href="@{/styles/main.css}"/>
 </head>
 <body>
-
-<form name="authentication-form" th:action="@{/user/registration}" method="post">
-    <div class="title">
-        <span>Pay My Buddy</span>
-    </div>
-    <div class="auth-fields">
-        <input type="text" name="username" placeholder="Username">
-        <input type="email" name="email" placeholder="Mail">
-        <input type="password" name="password" placeholder="Mot de Passe">
-    </div>
-    <button type="submit" value="S'inscrire">S'inscrire</button>
-</form>
-
+<main>
+    <form class="custom-form" name="authentication-form" th:action="@{/user/registration}" th:object="${registerFormDto}" method="post">
+        <div class="title">
+            <span>Pay My Buddy</span>
+        </div>
+        <div class="auth-fields">
+            <input type="text" name="username" placeholder="Username" th:field="*{username}">
+            <input type="email" name="email" placeholder="Mail" th:field="*{email}">
+            <input type="password" name="password" placeholder="Mot de Passe" th:field="*{password}">
+        </div>
+        <button type="submit" class="btn-blue" value="S'inscrire">S'inscrire</button>
+    </form>
+</main>
 </body>
 </html>

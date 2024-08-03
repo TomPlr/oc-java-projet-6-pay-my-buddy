@@ -2,6 +2,7 @@ package com.paymybuddy.controller;
 
 import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.model.GenericResponseModel;
+import com.paymybuddy.dto.RegisterFormDto;
 import com.paymybuddy.model.UserModel;
 import com.paymybuddy.service.UserService;
 import lombok.AllArgsConstructor;
@@ -17,10 +18,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/registration")
-    public ResponseEntity<UserModel> create(@RequestParam() String username,
-                                            @RequestParam() String email,
-                                            @RequestParam() String password) {
-        UserDto user = new UserDto(0, username, email, password, null);
+    public ResponseEntity<UserModel> create(@RequestBody RegisterFormDto registerFormDto) {
+        UserDto user = new UserDto(0, registerFormDto.getUsername(), registerFormDto.getEmail(), registerFormDto.getPassword(), null);
 
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
@@ -38,6 +37,11 @@ public class UserController {
     @DeleteMapping
     public ResponseEntity<GenericResponseModel> deleteUser() {
         return new ResponseEntity<>(userService.delete(), HttpStatus.OK);
+    }
+
+    @PostMapping("/add-connection")
+    public ResponseEntity<UserModel> addConnection(@RequestParam String email) {
+        return new ResponseEntity<>(userService.addConnection(email), HttpStatus.CREATED);
     }
 
 }

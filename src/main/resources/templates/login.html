@@ -6,19 +6,20 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pay My Buddy</title>
-    <link rel="stylesheet" type="text/css" href="../static/styles/main.css" data-th-href="@{/styles/main.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/main.css" data-th-href="@{/styles/main.css}"/>
 </head>
 <body>
-<form name="authentication-form" th:action="@{/login}" method="post">
-    <div class="title">
-        <span>Pay My Buddy</span>
-    </div>
-    <div class="auth-fields">
+<main>
+    <form class="custom-form" name="authentication-form" th:action="@{/login}" method="post">
+        <div class="title">
+            <span>Pay My Buddy</span>
+        </div>
+        <div class="auth-fields">
             <input type="email" name="email" placeholder="Mail">
             <input type="password" name="password" placeholder="Mot de Passe">
-    </div>
-    <button type="submit" value="Se connecter">Se connecter</button>
-</form>
-
+        </div>
+        <button type="submit" class="btn-blue" value="Se connecter">Se connecter</button>
+    </form>
+</main>
 </body>
 </html>

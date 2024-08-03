@@ -70,4 +70,17 @@ public class UserServiceImpl implements UserService {
 
         return new GenericResponseModel(true, "Successfully deleted user");
     }
+
+
+    @Override
+    public UserModel addConnection(String email) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity user = userRepository.findByUsername(authentication.getName()).orElseThrow();
+        UserEntity connection = userRepository.findByEmail(email).orElseThrow();
+
+        user.getConnections().add(connection);
+
+
+        return userAssembler.toModel(userRepository.save(user));
+    }
 }

@@ -28,7 +28,11 @@ public class SpringSecurityConfig {
                     auth.requestMatchers("/admin").hasRole("ADMIN");
                     auth.anyRequest().authenticated();
                 })
-                .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/login").usernameParameter("email").permitAll())
+                .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer
+                        .loginPage("/login")
+                        .usernameParameter("email")
+                        .permitAll()
+                        .defaultSuccessUrl("/add-connection", true))
                 .logout(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
