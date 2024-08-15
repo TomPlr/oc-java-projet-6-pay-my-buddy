@@ -24,9 +24,9 @@ public class UserController {
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<UserModel> getUser(@PathVariable String username) {
-        return new ResponseEntity<>(userService.findByUsername(username), HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<UserModel> getUser() {
+        return new ResponseEntity<>(userService.findUser(), HttpStatus.OK);
     }
 
     @PatchMapping

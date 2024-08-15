@@ -15,14 +15,14 @@ public class AccountEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private int id;
 
     @ColumnDefault("(_utf8mb4'blocked')")
     @Column(name = "status", length = 100)
     private String status;
     @ColumnDefault("(0)")
     @Column(name = "balance", columnDefinition = "double UNSIGNED")
-    private Object balance;
+    private int balance;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

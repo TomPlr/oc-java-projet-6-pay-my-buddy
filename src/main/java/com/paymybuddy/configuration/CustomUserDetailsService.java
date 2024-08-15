@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     /**
-     * @param email
+     * @param email String
      * @return new User()
      * @throws UsernameNotFoundException
      */
@@ -34,6 +34,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new User(user.getUsername(), user.getPassword(), getGrantedAuthorities(user.getRole()));
     }
 
+    /**
+     *
+     * @param role String
+     * @return authorities
+     */
     private List<GrantedAuthority> getGrantedAuthorities(String role) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role));

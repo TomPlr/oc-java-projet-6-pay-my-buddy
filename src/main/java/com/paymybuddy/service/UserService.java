@@ -15,12 +15,11 @@ public interface UserService {
     UserModel save(UserDto user);
 
     /**
-     * Get user by username
+     * Get user
      *
-     * @param username String
      * @return UserModel
      */
-    UserModel findByUsername(String username);
+    UserModel findUser();
 
     /**
      * Update a user

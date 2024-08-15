@@ -1,8 +1,7 @@
 package com.paymybuddy.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 
@@ -14,7 +13,7 @@ public class TransactionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private int id;
 
     @Column(name = "date", nullable = false)
     private Instant date;
@@ -23,7 +22,7 @@ public class TransactionEntity {
     private String description;
 
     @Column(name = "amount", columnDefinition = "double UNSIGNED not null")
-    private Object amount;
+    private int amount;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "sender_account_id", nullable = false)
@@ -32,6 +31,5 @@ public class TransactionEntity {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "receiver_account_id", nullable = false)
     private AccountEntity receiverAccountEntity;
-
 
 }

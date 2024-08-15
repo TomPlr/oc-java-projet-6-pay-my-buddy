@@ -42,8 +42,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserModel findByUsername(String username) {
-        return userAssembler.toModel(userRepository.findByUsername(username).orElseThrow());
+    public UserModel findUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return userAssembler.toModel(userRepository.findByUsername(authentication.getName()).orElseThrow());
     }
 
     @Override

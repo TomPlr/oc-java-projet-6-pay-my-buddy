@@ -1,0 +1,21 @@
+main{
+    flex-direction: column;
+    align-items: unset;
+    justify-content: unset;
+    height: calc(100vh - 164px);
+    padding: 0 67px ;
+    gap:157px;
+}
+
+form{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tx-income{
+    color: #187518;
+}
+
+.tx-outcome{
+    color: #b52727;
+}
