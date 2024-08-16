@@ -19,7 +19,7 @@ public class UserController {
 
     @PostMapping("/registration")
     public ResponseEntity<UserModel> create(@RequestBody RegisterFormDto registerFormDto) {
-        UserDto user = new UserDto(0, registerFormDto.getUsername(), registerFormDto.getEmail(), registerFormDto.getPassword(), null);
+        UserDto user = new UserDto( registerFormDto.getUsername(), registerFormDto.getEmail(), registerFormDto.getPassword(), null);
 
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }

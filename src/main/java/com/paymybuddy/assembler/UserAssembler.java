@@ -15,10 +15,4 @@ public class UserAssembler {
         return new UserModel(user.getId(), user.getUsername(), user.getEmail(), user.getActive(), connections);
     }
 
-//    public List<UserModel> toModels(List<UserEntity> users) {
-//        List<String> connections = new ArrayList<>();
-//        users.forEach(user -> user.getConnections().forEach(connection -> connections.add(connection.getUsername())));
-//
-//        return users.stream().map(user -> new UserModel(user.getId(), user.getUsername(), user.getEmail(), user.getActive(), connections)).toList();
-//    }
 }

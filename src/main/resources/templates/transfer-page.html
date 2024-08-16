@@ -25,11 +25,12 @@
                 <option th:each="connection : ${currentUser.connections()}" th:value="${connection}"
                         th:text="${connection}"></option>
             </select>
-            <input type="text" name="description" placeholder="Description" th:field="*{description}" required>
+            <input type="text" name="description" placeholder="Description" th:field="*{description}">
             <input type="number" min="0" name="amount" th:field="*{amount}" required>
         </div>
         <button type="submit" class="btn-blue">Payer</button>
     </form>
+    <p class="balance" th:text="'Solde: ' + ${userAccount.balance()} + '€'"></p>
     <div class="table-container">
         <p class="table-title">Mes Transactions</p>
         <table>

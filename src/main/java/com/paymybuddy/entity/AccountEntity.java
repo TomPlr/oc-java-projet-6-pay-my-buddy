@@ -22,7 +22,7 @@ public class AccountEntity {
     private String status;
     @ColumnDefault("(0)")
     @Column(name = "balance", columnDefinition = "double UNSIGNED")
-    private int balance;
+    private double balance;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

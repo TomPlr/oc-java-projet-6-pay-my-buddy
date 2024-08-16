@@ -13,4 +13,5 @@ public interface AccountRepository extends CrudRepository<AccountEntity, Integer
 
     @Query("SELECT a FROM AccountEntity a JOIN a.userEntity u WHERE u.username = :username")
     Optional<AccountEntity> findByUsername(@Param("username") String username);
+
 }

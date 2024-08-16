@@ -53,6 +53,11 @@ public class TransactionServiceImpl implements TransactionService {
         transactionEntity.setSenderAccountEntity(sender);
         transactionEntity.setReceiverAccountEntity(receiver);
 
+        sender.setBalance(sender.getBalance() - transactionFormDto.getAmount());
+        receiver.setBalance(receiver.getBalance() + transactionFormDto.getAmount());
+
+        accountRepository.save(sender);
+        accountRepository.save(receiver);
 
         return transactionAssembler.toModel(transactionRepository.save(transactionEntity));
     }

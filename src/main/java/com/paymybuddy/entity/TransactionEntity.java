@@ -22,7 +22,7 @@ public class TransactionEntity {
     private String description;
 
     @Column(name = "amount", columnDefinition = "double UNSIGNED not null")
-    private int amount;
+    private double amount;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "sender_account_id", nullable = false)

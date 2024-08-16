@@ -1,21 +1,29 @@
-main{
-    flex-direction: column;
-    align-items: unset;
-    justify-content: unset;
+main {
+    display: block;
     height: calc(100vh - 164px);
-    padding: 0 67px ;
-    gap:157px;
+    padding: 0 67px;
 }
 
-form{
+form {
     display: flex;
     justify-content: space-between;
 }
 
-.tx-income{
+.table-container{
+    max-height: calc(100% - 295px);
+}
+
+.balance{
+    text-align: right;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 167px 0 16px 0
+}
+
+.tx-income {
     color: #187518;
 }
 
-.tx-outcome{
+.tx-outcome {
     color: #b52727;
 }
