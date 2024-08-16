@@ -1,6 +1,6 @@
 package com.paymybuddy.controller;
 
-import com.paymybuddy.dto.RegisterFormDto;
+import com.paymybuddy.dto.ProfileFormDto;
 import com.paymybuddy.dto.TransactionFormDto;
 import com.paymybuddy.model.AccountModel;
 import com.paymybuddy.model.TransactionModel;
@@ -39,7 +39,7 @@ public class ThymeLeafController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("registerFormDto", new RegisterFormDto());
+        model.addAttribute("profileFormDto", new ProfileFormDto());
         return "register";
     }
 
@@ -60,5 +60,18 @@ public class ThymeLeafController {
         model.addAttribute("userAccount", userAccount);
 
         return "transfer-page";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model model) {
+        UserModel currentUser = userService.findUser();
+        ProfileFormDto profileFormDto = new ProfileFormDto();
+
+        profileFormDto.setUsername(currentUser.username());
+        profileFormDto.setEmail(currentUser.email());
+
+        model.addAttribute("profileFormDto", profileFormDto);
+
+        return "profile-page";
     }
 }

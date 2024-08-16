@@ -1,0 +1,17 @@
+main{
+    height: auto;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+}
+
+input, input:focus{
+    border: none;
+    outline: none;
+}
+
+
+form{
+}

@@ -2,7 +2,7 @@ package com.paymybuddy.controller;
 
 import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.model.GenericResponseModel;
-import com.paymybuddy.dto.RegisterFormDto;
+import com.paymybuddy.dto.ProfileFormDto;
 import com.paymybuddy.model.UserModel;
 import com.paymybuddy.service.UserService;
 import lombok.AllArgsConstructor;
@@ -18,8 +18,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/registration")
-    public ResponseEntity<UserModel> create(@RequestBody RegisterFormDto registerFormDto) {
-        UserDto user = new UserDto( registerFormDto.getUsername(), registerFormDto.getEmail(), registerFormDto.getPassword(), null);
+    public ResponseEntity<UserModel> create(@RequestBody ProfileFormDto profileFormDto) {
+        UserDto user = new UserDto( profileFormDto.getUsername(), profileFormDto.getEmail(), profileFormDto.getPassword(), null);
 
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
