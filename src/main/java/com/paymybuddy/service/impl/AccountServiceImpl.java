@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -37,7 +38,7 @@ public class AccountServiceImpl implements AccountService {
         AccountEntity accountEntity = accountRepository.findByUsername(authentication.getName()).orElseThrow();
 
         accountEntity.setBalance(account.balance());
-        accountEntity.setStatus(Objects.requireNonNull(account.status()));
+        Optional.ofNullable(account.status()).ifPresent(accountEntity::setStatus);
 
         return accountAssembler.toModel(accountRepository.save(accountEntity));
     }

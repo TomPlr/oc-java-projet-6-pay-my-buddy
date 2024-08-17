@@ -12,7 +12,7 @@ public class UserAssembler {
     public UserModel toModel(UserEntity user) {
         List<String> connections = user.getConnections().stream().map(UserEntity::getUsername).toList();
 
-        return new UserModel(user.getId(), user.getUsername(), user.getEmail(), user.getActive(), connections);
+        return new UserModel(user.getUsername(), user.getEmail(), user.getActive(), connections);
     }
 
 }

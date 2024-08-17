@@ -7,6 +7,7 @@ import com.paymybuddy.model.GenericResponseModel;
 import com.paymybuddy.model.UserModel;
 import com.paymybuddy.repository.UserRepository;
 import com.paymybuddy.service.UserService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -54,6 +55,11 @@ public class UserServiceImpl implements UserService {
 
         Optional.ofNullable(user.username()).ifPresent(userUpdated::setUsername);
         Optional.ofNullable(user.email()).ifPresent(userUpdated::setEmail);
+        Optional.ofNullable(user.password()).ifPresent(password -> {
+            if(!password.isBlank() && !passwordEncoder.matches(user.password(), userUpdated.getPassword())) {
+                userUpdated.setPassword(passwordEncoder.encode(user.password()));
+            }
+        });
 
         return userAssembler.toModel(userRepository.save(userUpdated));
     }

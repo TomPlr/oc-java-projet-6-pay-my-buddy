@@ -6,12 +6,11 @@ import com.paymybuddy.service.TransactionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/transaction")
 @AllArgsConstructor
 public class TransactionController {
@@ -19,7 +18,7 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping
-    public ResponseEntity<TransactionModel> create(@ModelAttribute TransactionFormDto transactionFormDto) throws Exception {
+    public ResponseEntity<TransactionModel> create(@RequestBody TransactionFormDto transactionFormDto) throws Exception {
         return new ResponseEntity<>(transactionService.save(transactionFormDto), HttpStatus.CREATED);
     }
 

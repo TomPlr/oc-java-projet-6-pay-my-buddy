@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pay My Buddy</title>
     <link rel="stylesheet" type="text/css" href="../static/styles/main.css" data-th-href="@{/styles/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/styles/login-page.css" data-th-href="@{/styles/login-page.css}"/>
 </head>
 <body>
 <main>
@@ -18,7 +19,10 @@
             <input type="email" name="email" placeholder="Mail">
             <input type="password" name="password" placeholder="Mot de Passe">
         </div>
-        <button type="submit" class="btn-blue" value="Se connecter">Se connecter</button>
+        <div class="btn-container">
+            <button type="submit" class="btn-blue" value="Se connecter">Se connecter</button>
+            <a href="/register">ou créer un compte</a>
+        </div>
     </form>
 </main>
 </body>
