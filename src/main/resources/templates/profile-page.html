@@ -18,7 +18,7 @@
     </ul>
 </header>
 <main>
-    <form id="add-transaction-form" th:action="@{/user}" th:object="${profileFormDto}" method="post">
+    <form id="add-transaction-form" th:action="@{/profile}" th:object="${profileFormDto}" method="post">
         <div>
             <label for="username"> Username
                 <input id="username" type="text" name="username" th:placeholder="*{username}" th:field="*{username}"><span>></span>
