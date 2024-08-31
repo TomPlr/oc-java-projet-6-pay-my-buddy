@@ -2,5 +2,5 @@ package com.paymybuddy.dto;
 
 import java.time.Instant;
 
-public record TransactionDto(Instant date, String description, int amount, String senderEmail, String receiverEmail) {
+public record TransactionDto(Instant date, String description, double amount, String senderEmail, String receiverEmail) {
 }

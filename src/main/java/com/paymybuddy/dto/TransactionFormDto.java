@@ -14,5 +14,5 @@ public class TransactionFormDto {
     private Instant date;
     private String receiverUsername;
     private String description;
-    private int amount;
+    private double amount;
 }
