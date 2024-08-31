@@ -4,6 +4,7 @@ import com.paymybuddy.assembler.TransactionAssembler;
 import com.paymybuddy.dto.TransactionFormDto;
 import com.paymybuddy.entity.AccountEntity;
 import com.paymybuddy.entity.TransactionEntity;
+import com.paymybuddy.exception.InsufficientBalanceException;
 import com.paymybuddy.model.TransactionModel;
 import com.paymybuddy.repository.AccountRepository;
 import com.paymybuddy.repository.TransactionRepository;
@@ -40,7 +41,7 @@ public class TransactionServiceImpl implements TransactionService {
         Instant now = Instant.now();
 
         if (sender.getBalance() < transactionFormDto.getAmount()) {
-            throw new Exception();
+            throw new InsufficientBalanceException("Insufficient balance");
         }
 
         AccountEntity receiver = accountRepository.findByUsername(transactionFormDto.getReceiverUsername()).orElseThrow();
