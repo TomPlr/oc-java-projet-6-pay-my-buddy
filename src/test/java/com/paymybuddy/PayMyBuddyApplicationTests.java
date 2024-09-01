@@ -1,13 +1,21 @@
 package com.paymybuddy;
 
-import org.springframework.boot.SpringApplication;
+import com.paymybuddy.controller.AccountController;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class PayMyBuddyApplicationTests {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(PayMyBuddyApplicationTests.class);
-        app.run(args);
+@SpringBootTest
+public class PayMyBuddyApplicationTests {
+
+    @Autowired
+    private AccountController accountController;
+
+    @Test
+    void contextLoads() {
+        assertThat(accountController).isNotNull();
     }
 }
+
