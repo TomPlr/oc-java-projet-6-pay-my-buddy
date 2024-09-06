@@ -44,9 +44,8 @@ public class AccountControllerIT {
     }
 
     @Test
-    public void findUserAccountTest() throws Exception {
+    public void findUserAccount_should_return_user_account() throws Exception {
         mockMvc.perform(get("/account").contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(jsonPath("$.username").value("kticksall0"))
                 .andExpect(jsonPath("$.status").value("allowed"))
                 .andExpect(status().isOk())

@@ -18,6 +18,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -28,12 +29,13 @@ public class TransactionControllerIT {
     private TransactionController transactionController;
 
     private MockMvc mockMvc;
+    private  Authentication authentication;
 
     @BeforeEach
     public void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(transactionController).build();
 
-        Authentication authentication = mock(Authentication.class);
+        authentication = mock(Authentication.class);
         SecurityContext securityContext = mock(SecurityContext.class);
 
         when(securityContext.getAuthentication()).thenReturn(authentication);
@@ -46,15 +48,19 @@ public class TransactionControllerIT {
     public void createTransaction() throws Exception {
         mockMvc.perform(post("/transaction").contentType(MediaType.APPLICATION_JSON)
                         .content("{\"amount\":1,\"date\":\"2019-08-24T14:15:22Z\",\"description\":\"test\",\"receiverUsername\":\"mlibbie1\"}"))
-                .andDo(print())
+                .andExpect(jsonPath("$.senderUsername").value("kticksall0"))
+                .andExpect(jsonPath("$.receiverUsername").value("mlibbie1"))
+                .andExpect(jsonPath("$.description").value("test"))
                 .andExpect(status().isCreated())
                 .andReturn();
     }
 
     @Test
     public void findAllByUsername() throws Exception {
+        when(authentication.getName()).thenReturn("admin");
+
         mockMvc.perform(get("/transaction/all").contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
+                .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(status().isOk())
                 .andReturn();
     }

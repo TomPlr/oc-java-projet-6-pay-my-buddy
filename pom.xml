@@ -154,6 +154,7 @@
                         <exclude>com/paymybuddy/dto/*</exclude>
                         <exclude>com/paymybuddy/entity/*</exclude>
                         <exclude>**/config/*</exclude>
+                        <exclude>com/paymybuddy/controller/ThymeLeafController.*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
