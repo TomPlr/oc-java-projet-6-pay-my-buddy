@@ -151,9 +151,10 @@
                 </executions>
                 <configuration>
                     <excludes>
+                        <exclude>**/config/*</exclude>
                         <exclude>com/paymybuddy/dto/*</exclude>
                         <exclude>com/paymybuddy/entity/*</exclude>
-                        <exclude>**/config/*</exclude>
+                        <exclude>com/paymybuddy/mapper/*</exclude>
                         <exclude>com/paymybuddy/controller/ThymeLeafController.*</exclude>
                     </excludes>
                 </configuration>

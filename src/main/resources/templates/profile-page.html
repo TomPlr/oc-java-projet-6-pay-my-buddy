@@ -11,8 +11,8 @@
 <header>
     <p>Pay My Buddy</p>
     <ul>
-        <li><a href="/transfer" class="current-link">Transférer</a></li>
-        <li><a href="">Profil</a></li>
+        <li><a href="/transfer">Transférer</a></li>
+        <li><a href="" class="current-link">Profil</a></li>
         <li><a href="/add-connection">Ajouter relation</a></li>
         <li><a href="/logout">Se déconnecter</a></li>
     </ul>
@@ -20,17 +20,24 @@
 <main>
     <form id="add-transaction-form" th:action="@{/profile}" th:object="${profileFormDto}" method="post">
         <div>
-            <label for="username"> Username
-                <input id="username" type="text" name="username" th:placeholder="*{username}" th:field="*{username}"><span>></span>
-            </label>
-            <label for="email"> Email
-                <input id="email" type="email" name="email" th:placeholder="*{email}" th:field="*{email}"><span>></span>
-            </label>
-            <label for="password"> Password
-                <input id="password" type="password" name="password" placeholder="***********" th:field="*{password}"><span>></span>
-            </label>
+            <div class="form-fields">
+                <p>Nom d'utilisateur</p>
+                <p th:text="'@' + *{username}"></p>
+            </div>
+            <div class="form-fields">
+                <p>Mail</p>
+                <input id="email" type="email" name="email" th:placeholder="*{email}" th:field="*{email}">
+                <span class="bracket">></span>
+            </div>
+            <div class="form-fields">
+                <p>Mot de passe</p>
+                <input id="password" type="password" name="password" placeholder="***********"
+                       th:field="*{password}">
+                <span class="bracket">></span>
+                <button type="submit" class="btn-orange">Modifier</button>
+            </div>
         </div>
-        <button type="submit" class="btn-orange">Modifier</button>
+
     </form>
 </main>
 </body>

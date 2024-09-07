@@ -18,9 +18,11 @@
     </ul>
 </header>
 <main>
-    <form id="add-transaction-form" action="/transfer" th:object="${transactionFormDto}" method="post" enctype="application/x-www-form-urlencoded">
+    <form id="add-transaction-form" action="/transfer" th:object="${transactionFormDto}" method="post"
+          enctype="application/x-www-form-urlencoded">
         <div>
-            <select name="connections" id="connection-select" th:object="${currentUser}" th:field="${transactionFormDto.receiverUsername}" required>
+            <select name="connections" id="connection-select" th:object="${currentUser}"
+                    th:field="${transactionFormDto.receiverUsername}" required>
                 <option value="" disabled selected>Sélectionner une relation</option>
                 <option th:each="connection : ${currentUser.connections()}" th:value="${connection}"
                         th:text="${connection}"></option>
