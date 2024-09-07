@@ -2,10 +2,12 @@ package com.paymybuddy.service;
 
 import com.paymybuddy.assembler.UserAssembler;
 import com.paymybuddy.dto.UserDto;
+import com.paymybuddy.entity.AccountEntity;
 import com.paymybuddy.entity.UserEntity;
 import com.paymybuddy.mapper.UserMapper;
 import com.paymybuddy.model.GenericResponseModel;
 import com.paymybuddy.model.UserModel;
+import com.paymybuddy.repository.AccountRepository;
 import com.paymybuddy.repository.UserRepository;
 import com.paymybuddy.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
@@ -38,10 +40,13 @@ public class UserServiceTest {
     private static Authentication authentication;
     private UserEntity user1;
     private UserEntity user2;
+    private AccountEntity account;
 
 
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private AccountRepository accountRepository;
 
     @Spy
     private BCryptPasswordEncoder passwordEncoder;
@@ -68,6 +73,7 @@ public class UserServiceTest {
     public void setUp() {
         user1 = new UserEntity();
         user2 = new UserEntity();
+        account = new AccountEntity();
 
         user1.setUsername("johndoe");
         user1.setPassword("$2a$10$l5LMWDle5tA.PKyNlgOdA.iQIEZG0hSDSonwI4OJxz1NtzwI88aGa");
@@ -78,11 +84,15 @@ public class UserServiceTest {
         user2.setPassword("$2a$10$l5LMWDle5tA.PKyNlgOdA.iQIEZG0hSDSonwI4OJxz1NtzwI88aGa");
         user2.setEmail("janedoe@gmail.com");
         user2.setConnections(new ArrayList<>());
+
+        account.setUserEntity(user1);
+        account.setStatus("allowed");
     }
 
     @Test
     public void saveTest() {
         when(userRepository.save(any(UserEntity.class))).thenReturn(user1);
+        when(accountRepository.save(any(AccountEntity.class))).thenReturn(account);
 
         UserModel result = userService.save(userMapper.toDto(user1));
 
