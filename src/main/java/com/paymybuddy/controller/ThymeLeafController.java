@@ -51,6 +51,16 @@ public class ThymeLeafController {
         return "register";
     }
 
+    @PostMapping("/register")
+    public String registration(@ModelAttribute("profileFormDto") ProfileFormDto profileFormDto) {
+        try {
+            userService.save(userMapper.toUserDto(profileFormDto));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return "login";
+    }
+
     @GetMapping("/add-connection")
     public String addConnection() {
         return "add-connection-page";

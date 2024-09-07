@@ -24,8 +24,8 @@ public class AccountEntity {
     /**
      * The status of the account. Default value is 'blocked'.
      */
-    @ColumnDefault("(_utf8mb4'blocked')")
-    @Column(name = "status", length = 100)
+    @ColumnDefault("(_utf8mb4'allowed')")
+    @Column(name = "status", nullable = false, length = 100)
     private String status;
 
     /**

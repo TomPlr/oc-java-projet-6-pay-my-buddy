@@ -26,7 +26,7 @@ CREATE TABLE `account`
 (
     `id`      int             NOT NULL AUTO_INCREMENT,
     `balance` double unsigned NOT NULL DEFAULT (0),
-    `status`  varchar(100)    NOT NULL DEFAULT ('blocked'),
+    `status`  varchar(100)    NOT NULL DEFAULT ('allowed'),
     `user_id` int             NOT NULL,
     PRIMARY KEY (`id`),
     KEY `user_id` (`user_id`),
