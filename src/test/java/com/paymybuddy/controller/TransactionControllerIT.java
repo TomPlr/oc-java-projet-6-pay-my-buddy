@@ -45,7 +45,7 @@ public class TransactionControllerIT {
     }
 
     @Test
-    public void createTransaction() throws Exception {
+    public void createTransaction_should_return_sent_transaction_model_when_successful() throws Exception {
         mockMvc.perform(post("/transaction").contentType(MediaType.APPLICATION_JSON)
                         .content("{\"amount\":1,\"date\":\"2019-08-24T14:15:22Z\",\"description\":\"test\",\"receiverUsername\":\"mlibbie1\"}"))
                 .andExpect(jsonPath("$.senderUsername").value("kticksall0"))
@@ -56,7 +56,7 @@ public class TransactionControllerIT {
     }
 
     @Test
-    public void findAllByUsername() throws Exception {
+    public void findAllByUsername_should_return_all_user_transactions() throws Exception {
         when(authentication.getName()).thenReturn("admin");
 
         mockMvc.perform(get("/transaction/all").contentType(MediaType.APPLICATION_JSON))

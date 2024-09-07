@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -41,10 +42,10 @@ public class TransactionServiceImpl implements TransactionService {
         Instant now = Instant.now();
 
         if (sender.getBalance() < transactionFormDto.getAmount()) {
-            throw new InsufficientBalanceException("Insufficient balance");
+            throw new InsufficientBalanceException();
         }
 
-        AccountEntity receiver = accountRepository.findByUsername(transactionFormDto.getReceiverUsername()).orElseThrow();
+        AccountEntity receiver = accountRepository.findByUsername(transactionFormDto.getReceiverUsername()).orElseThrow(() -> new NoSuchElementException("Receiver username is unknown"));
 
         TransactionEntity transactionEntity = new TransactionEntity();
 

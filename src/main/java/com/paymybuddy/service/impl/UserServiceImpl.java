@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -83,7 +84,7 @@ public class UserServiceImpl implements UserService {
     public UserModel addConnection(String email) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity user = userRepository.findByUsername(authentication.getName()).orElseThrow();
-        UserEntity connection = userRepository.findByEmail(email).orElseThrow();
+        UserEntity connection = userRepository.findByEmail(email).orElseThrow(()-> new NoSuchElementException("This email address is unknown"));
 
         user.getConnections().add(connection);
 

@@ -101,7 +101,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void save_return_transactionMdoel_if_is_sucessful() throws Exception {
+    public void save_return_transactionModel_if_is_successful() throws Exception {
         when(accountRepository.findByUsername(authentication.getName())).thenReturn(Optional.ofNullable(sender));
         when(accountRepository.findByUsername("janedoe")).thenReturn(Optional.ofNullable(receiver));
         when(transactionRepository.save(any(TransactionEntity.class))).thenReturn(transaction);
@@ -112,7 +112,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void save_throw_insufficientBalanceException_when_sender_balance_is_too_low() throws Exception {
+    public void save_throw_insufficientBalanceException_when_sender_balance_is_too_low() {
         sender.setBalance(0);
 
         when(accountRepository.findByUsername(authentication.getName())).thenReturn(Optional.ofNullable(sender));
@@ -121,7 +121,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void findAllTest(){
+    public void findAll_should_return_all_user_transactions(){
 
         when(transactionRepository.findAllByUsername("johndoe")).thenReturn(List.of(transaction));
 
