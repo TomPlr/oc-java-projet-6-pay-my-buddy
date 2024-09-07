@@ -1,6 +1,5 @@
 package com.paymybuddy.controller;
 
-import com.paymybuddy.configuration.CustomUserDetailsService;
 import com.paymybuddy.dto.ProfileFormDto;
 import com.paymybuddy.dto.TransactionFormDto;
 import com.paymybuddy.mapper.UserMapper;
@@ -10,6 +9,7 @@ import com.paymybuddy.model.UserModel;
 import com.paymybuddy.service.AccountService;
 import com.paymybuddy.service.TransactionService;
 import com.paymybuddy.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class ThymeLeafController {
 
     private final TransactionService transactionService;
@@ -27,7 +28,7 @@ public class ThymeLeafController {
     private final AccountService accountService;
     private final UserMapper userMapper;
 
-    public ThymeLeafController(TransactionService transactionService, UserService userService, AccountService accountService, UserMapper userMapper, CustomUserDetailsService userDetailsService) {
+    public ThymeLeafController(TransactionService transactionService, UserService userService, AccountService accountService, UserMapper userMapper) {
         this.transactionService = transactionService;
         this.userService = userService;
         this.accountService = accountService;
@@ -57,7 +58,11 @@ public class ThymeLeafController {
 
     @PostMapping("/add-connection")
     public String addConnection(@RequestParam String email) {
-        userService.addConnection(email);
+        try {
+            userService.addConnection(email);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
         return "add-connection-page";
     }
 
@@ -69,8 +74,14 @@ public class ThymeLeafController {
     }
 
     @PostMapping("/transfer")
-    public String transfer(@ModelAttribute("transactionFormDto") TransactionFormDto transactionFormDto, Model model) throws Exception {
-        transactionService.save(transactionFormDto);
+    public String transfer(@ModelAttribute("transactionFormDto") TransactionFormDto transactionFormDto, Model model) {
+        log.info("Transaction in progress...");
+        try {
+            transactionService.save(transactionFormDto);
+            log.info("Transaction sent successfully !");
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
         addTransferPageData(model);
 
         return "transfer-page";
@@ -92,8 +103,15 @@ public class ThymeLeafController {
 
     @PostMapping("/profile")
     public String profile(@ModelAttribute("profileFormDto") ProfileFormDto profileFormDto, Model model) {
-        UserModel user = userService.update(userMapper.toUserDto(profileFormDto));
-        model.addAttribute("profileFormDto", userMapper.toProfileFormDto(user));
+        log.info("Updating profile in progress...");
+        try {
+            UserModel user = userService.update(userMapper.toUserDto(profileFormDto));
+            model.addAttribute("profileFormDto", userMapper.toProfileFormDto(user));
+
+            log.info("Profile updated successfully !");
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
 
         return "profile-page";
     }

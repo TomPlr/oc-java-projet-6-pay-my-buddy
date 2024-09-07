@@ -35,10 +35,10 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(InsufficientBalanceException.class)
-    public ResponseEntity<Object> handleInsufficientBalanceException() {
+    public ResponseEntity<Object> handleInsufficientBalanceException(InsufficientBalanceException e) {
         Map<String, String> errors = new HashMap<>();
         errors.put("success", "false");
-        errors.put("reason", "Sender's balance is not enough");
+        errors.put("reason", e.getMessage());
         return ResponseEntity.badRequest().body(errors);
     }
 

@@ -42,7 +42,7 @@ public class TransactionServiceImpl implements TransactionService {
         Instant now = Instant.now();
 
         if (sender.getBalance() < transactionFormDto.getAmount()) {
-            throw new InsufficientBalanceException();
+            throw new InsufficientBalanceException("Unable to complete the transaction, your balance is insufficient.");
         }
 
         AccountEntity receiver = accountRepository.findByUsername(transactionFormDto.getReceiverUsername()).orElseThrow(() -> new NoSuchElementException("Receiver username is unknown"));
