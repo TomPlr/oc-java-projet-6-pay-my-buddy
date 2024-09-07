@@ -9,6 +9,13 @@ import org.springframework.stereotype.Repository;
 public interface TransactionRepository extends CrudRepository<TransactionEntity, Integer> {
 
 
+    /**
+     * Finds all TransactionEntities associated with a user by their username.
+     *
+     * @param username the username of the user
+     *
+     * @return an Iterable containing the TransactionEntities associated with the user
+     */
     @Query("SELECT t FROM TransactionEntity t " +
             "JOIN t.receiverAccountEntity receiverAccount " +
             "JOIN receiverAccount.userEntity receiver " +

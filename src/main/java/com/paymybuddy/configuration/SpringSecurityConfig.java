@@ -21,6 +21,14 @@ public class SpringSecurityConfig {
         this.userDetailsService = userDetailsService;
     }
 
+    /**
+     * Configures the security filter chain.
+     *
+     * @param http the HttpSecurity object to configure
+     *
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(auth -> {
@@ -38,11 +46,25 @@ public class SpringSecurityConfig {
                 .build();
     }
 
+    /**
+     * Provides a BCryptPasswordEncoder bean.
+     *
+     * @return a new instance of BCryptPasswordEncoder
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Configures and provides an AuthenticationManager bean.
+     *
+     * @param http the HttpSecurity object
+     * @param bCryptPasswordEncoder the BCryptPasswordEncoder bean
+     *
+     * @return the configured AuthenticationManager
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);

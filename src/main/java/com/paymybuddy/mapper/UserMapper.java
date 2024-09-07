@@ -11,8 +11,6 @@ public interface UserMapper {
 
     UserDto toDto(UserEntity userEntity);
 
-    UserEntity toEntity(UserDto userDto);
-
     UserDto toUserDto(ProfileFormDto profileFormDto);
 
     ProfileFormDto toProfileFormDto(UserModel userModel);
