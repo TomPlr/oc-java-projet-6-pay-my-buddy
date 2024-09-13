@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay My Buddy</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/main.css" data-th-href="@{/styles/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/styles/profile-page.css"
+          data-th-href="@{/styles/profile-page.css}"/>
+</head>
+<body>
+<header>
+    <p>Pay My Buddy</p>
+    <ul>
+        <li><a href="/transfer">Transférer</a></li>
+        <li><a href="" class="current-link">Profil</a></li>
+        <li><a href="/add-connection">Ajouter relation</a></li>
+        <li><a href="/logout">Se déconnecter</a></li>
+    </ul>
+</header>
+<main>
+    <form id="add-transaction-form" th:action="@{/profile}" th:object="${profileFormDto}" method="post">
+        <div>
+            <div class="form-fields">
+                <p>Nom d'utilisateur</p>
+                <p th:text="'@' + *{username}"></p>
+            </div>
+            <div class="form-fields">
+                <p>Mail</p>
+                <input id="email" type="email" name="email" th:placeholder="*{email}" th:field="*{email}">
+                <span class="bracket">></span>
+            </div>
+            <div class="form-fields">
+                <p>Mot de passe</p>
+                <input id="password" type="password" name="password" placeholder="***********"
+                       th:field="*{password}">
+                <span class="bracket">></span>
+                <button type="submit" class="btn-orange">Modifier</button>
+            </div>
+        </div>
+
+    </form>
+</main>
+</body>
+
+</html>

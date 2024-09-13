@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay My Buddy</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/main.css" data-th-href="@{/styles/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/styles/add-connection-page.css"
+          data-th-href="@{/styles/add-connection-page.css}"/>
+</head>
+<body>
+<header>
+    <p>Pay My Buddy</p>
+    <ul>
+        <li><a href="/transfer">Transférer</a></li>
+        <li><a href="/profile">Profil</a></li>
+        <li><a href="" class="current-link">Ajouter relation</a></li>
+        <li><a href="/logout">Se déconnecter</a></li>
+    </ul>
+</header>
+<main>
+    <form id="add-connection-form" action="/add-connection" method="post">
+        <label for="email">Chercher une relation</label>
+        <input id="email" name="email" type="email" placeholder="Saisir une adresse mail" required>
+    </form>
+    <button type="submit" form="add-connection-form" class="btn-orange">Ajouter</button>
+</main>
+</body>
+</html>

@@ -1,0 +1,68 @@
+main{
+    height: auto;
+}
+
+form{
+    display: flex;
+}
+
+form button{
+    height: 64px;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+}
+
+form div:last-child{
+    position: relative;
+}
+
+form div p:first-child{
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    width: 156px;
+}
+
+input{
+    padding: 12px 0 ;
+}
+
+input, input:focus{
+    border: none;
+    outline: none;
+    color: black;
+}
+
+.form-fields{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-fields p{
+    border-radius: 8px;
+    padding: 12px 0px;
+    height: 48px;
+}
+
+.form-fields:last-child{
+    height: 64px;
+    align-items: flex-start;
+}
+
+.form-fields button{
+    box-sizing: border-box;
+    height: 42px;
+    width: 108px;
+    padding: 0;
+    margin-top: 14px;
+    margin-left: 64px;
+}
+
+.bracket{
+    color: #757575;
+    padding: 12px 0;
+}

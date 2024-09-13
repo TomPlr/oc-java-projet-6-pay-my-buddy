@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay My Buddy</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/main.css" data-th-href="@{/styles/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/styles/transfer-page.css"
+          data-th-href="@{/styles/transfer-page.css}"/>
+</head>
+<body>
+<header>
+    <p>Pay My Buddy</p>
+    <ul>
+        <li><a href="" class="current-link">Transférer</a></li>
+        <li><a href="/profile">Profil</a></li>
+        <li><a href="/add-connection">Ajouter relation</a></li>
+        <li><a href="/logout">Se déconnecter</a></li>
+    </ul>
+</header>
+<main>
+    <form id="add-transaction-form" action="/transfer" th:object="${transactionFormDto}" method="post"
+          enctype="application/x-www-form-urlencoded">
+        <div>
+            <select name="connections" id="connection-select" th:object="${currentUser}"
+                    th:field="${transactionFormDto.receiverUsername}" required>
+                <option value="" disabled selected>Sélectionner une relation</option>
+                <option th:each="connection : ${currentUser.connections()}" th:value="${connection}"
+                        th:text="${connection}"></option>
+            </select>
+            <input type="text" name="description" placeholder="Description" th:field="*{description}">
+            <input type="number" min="0.01" name="amount" step="0.01" th:field="*{amount}" required>
+        </div>
+        <button type="submit" class="btn-blue">Payer</button>
+    </form>
+    <p class="balance" th:text="'Solde: ' + ${userAccount.balance()} + '€'"></p>
+    <div class="table-container">
+        <p class="table-title">Mes Transactions</p>
+        <table>
+            <thead>
+            <tr>
+                <th>Relations</th>
+                <th>Description</th>
+                <th>Montant</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="transaction : ${transactions}">
+                <td th:text="${transaction.senderUsername() == currentUser.username() ? transaction.receiverUsername() : transaction.senderUsername()}"></td>
+                <td th:text="${transaction.description()}"></td>
+                <td class="tx-outcome"
+                    th:if="${transaction.senderUsername() == currentUser.username()}"
+                    th:text="'-' + ${transaction.amount()} + '€'"></td>
+                <td class="tx-income"
+                    th:unless="${transaction.senderUsername() == currentUser.username()}"
+                    th:text="'+' + ${transaction.amount()} + '€'"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+
+</html>
